@@ -4,13 +4,21 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import './index.css';
 import { useEffect, useState } from 'react';
 
+import Trending from './Trending';
+import Random from './Random';
+import Search from './Search';
+import LoadMore from './LoadMore';
+
 function App() {
 
   const [search, setSearch] = useState("")
   const [rating, setRating] = useState("g")
+  
+  let link = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&q=&limit=25&offset=0&rating=`
   let trending = `https://api.giphy.com/v1/gifs/trending?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=25&rating=`
   let random = `https://api.giphy.com/v1/gifs/random?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&tag=&limit=25&rating=`
-  let link = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&q=&limit=25&offset=0&rating=`
+  
+  
   const [randomLink, setrandomLink] = useState(random+rating)
   const [trendingLink, settrendingLink] = useState(trending+rating)
   const [searchLink, setsearchLink] = useState(link+rating)
@@ -18,41 +26,17 @@ function App() {
   const [randomArray, setrandomArray] = useState([])
   const [trendingArray, settrendingArray] = useState([])
   const [searchArray, setsearchArray] = useState([])
+  const [plusten, setPlusten] = useState(0)
 
   // Testing useState
   const [test, setTest] = useState([])
   // Future "LoadMore" component, which load additional content, while reaching bottom of the page
-  const callback = () => { console.log('yeet') };
+  const callback = () => { 
+    console.log('yeet') 
+    setPlusten(plusten+10)
+  };
 
   useBottomScrollListener(callback);
-  // Trending and random pages
-  useEffect(()=>{
-    Promise.all([
-      fetch("https://dog.ceo/api/breed/hound/images/random/5").then(res => {
-        if(res.ok) {
-          return res.json()
-        }
-        throw res
-      }),
-      fetch("https://dog.ceo/api/breed/hound/images/random/5").then(res => {
-        if(res.ok) {
-          return res.json()
-        }
-        throw res
-      })
-  ]).then((urlData) => {
-      settrendingArray(urlData[0].message)
-      setrandomArray(urlData[1].message)
-  }) 
-  },[]);
-  console.log("random", randomArray)
-  console.log("trending", trendingArray)
-  // Search page
-
-  // useEffect(()=>{
-  //   fetch(trendingLink).then(res => res.json()).then(data => setTest(data.data))
-  //   console.log(test)
-  // },[]);
 
   function handleChange(e) {
 
@@ -75,7 +59,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ height: "700px"}}>
       <header>
         <form onChange={(e) => handleChange(e)}>
           <input name="search" onChange={(e) => { handleChange(e)}} ></input>
@@ -87,21 +71,13 @@ function App() {
           </select>
         </form>
       </header>
-      <section>
-        Trending
-        <p>{trendingLink}</p>
-      </section>
-      <section>
-        Random
-        <p>{randomLink}</p>
-        {/* <p>{test.map(data => <img src={data.images.fixed_width.url}></img>)}</p> */}
-      </section>
-      <section>
-        Search
-        <p>{search}</p>
-        <p>{rating}</p>
-        <p>{searchLink}</p>
-        </section>
+      {search.length > 0 
+      ?
+      <Search search = {search} rating = {rating} ></Search>
+      :
+      <Trending rating = {rating} ></Trending>
+      }
+      <LoadMore plusten = {plusten} search = {search} rating = {rating}></LoadMore>
     </div>
   );
 }
