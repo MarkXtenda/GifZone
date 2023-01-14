@@ -1,39 +1,40 @@
-import Random from "./Random";
 import { useState, useEffect } from "react";
 
-function Trending({rating}) {
-    const [randomArray, setrandomArray] = useState([])
+function Trending({rating, trendinglinkpart}) {
     const [trendingArray, settrendingArray] = useState([])
-    
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(()=>{
-        Promise.all([
-          fetch("https://dog.ceo/api/breed/hound/images/random/5").then(res => {
-            if(res.ok) {
-              return res.json()
-            }
-            throw res
-          }),
-          fetch("https://dog.ceo/api/breed/hound/images/random/5").then(res => {
-            if(res.ok) {
-              return res.json()
-            }
-            throw res
-          })
-      ]).then((urlData) => {
-          settrendingArray(urlData[0].message)
-          setrandomArray(urlData[1].message)
-      }) 
-    },[]);
-    return (
-        <div>
-            <Random rating = {rating} array = {randomArray}></Random>
+        setIsLoading(true)
+        fetch(`${trendinglinkpart}&rating=${rating}`)
+        .then(res => res.json())
+        .then((data) => {
+            const timer = setTimeout(() => {
+                setIsLoading(false)
+                settrendingArray(data.data)
+                console.log(trendingArray)
+            }, 1000);
+            return () => clearTimeout(timer);         
+        })
+    },[rating]);
+
+    if(isLoading) {
+        return (
             <section>
                 Trending
                 <p>{rating}</p>
-                <p>{trendingArray.map((image, id) => <img key={id} src={image} style={{ height: "100px", width: "100px" }}></img>)}</p>
+                <h2>Loading...</h2>
             </section>
-        </div>
-    );
+        );
+    }
+    else {
+        return (
+            <section>
+                Trending
+                <p>{rating}</p>
+                <p>{trendingArray.map((image, id) => <img key={id} src={image.images.downsized.url} style={{ height: "100px", width: "100px" }}></img>)}</p>
+            </section>
+        );
+    }
   }
   
   export default Trending;

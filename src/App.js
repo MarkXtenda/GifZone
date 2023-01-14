@@ -4,6 +4,7 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import './index.css';
 import { useEffect, useState } from 'react';
 
+import Header from './Header';
 import Trending from './Trending';
 import Random from './Random';
 import Search from './Search';
@@ -11,73 +12,96 @@ import LoadMore from './LoadMore';
 
 function App() {
 
-  const [search, setSearch] = useState("")
+  // const [search, setSearch] = useState("")
   const [rating, setRating] = useState("g")
-  
-  let link = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&q=&limit=25&offset=0&rating=`
-  let trending = `https://api.giphy.com/v1/gifs/trending?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=25&rating=`
-  let random = `https://api.giphy.com/v1/gifs/random?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&tag=&limit=25&rating=`
-  
-  
-  const [randomLink, setrandomLink] = useState(random+rating)
-  const [trendingLink, settrendingLink] = useState(trending+rating)
-  const [searchLink, setsearchLink] = useState(link+rating)
 
-  const [randomArray, setrandomArray] = useState([])
-  const [trendingArray, settrendingArray] = useState([])
-  const [searchArray, setsearchArray] = useState([])
-  const [plusten, setPlusten] = useState(0)
+  const [headerData, setHeaderData] = useState({ search: "", rating: "g" })
 
-  // Testing useState
-  const [test, setTest] = useState([])
+  const searchlinkpart = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=10`
+  const trendinglinkpart = `https://api.giphy.com/v1/gifs/trending?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=10`
+  const randomlinkpart = `https://api.giphy.com/v1/gifs/random?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&tag=&limit=10`
+
+  const [plusten, setPlusten] = useState(10)
   // Future "LoadMore" component, which load additional content, while reaching bottom of the page
   const callback = () => { 
-    console.log('yeet') 
-    setPlusten(plusten+10)
+    console.log('send plusten') 
+    setPlusten((plusten)=>plusten+10)
   };
 
   useBottomScrollListener(callback);
 
-  function handleChange(e) {
-
-    if (e.target.name == "search") {
-      setSearch(e.target.value)
-      setsearchLink(link+rating + "     " +search)
-
-    } else {
-
-      setRating(e.target.value)
-
-      if (search.length > 0) {
-        setsearchLink(link+rating + "     " +search)
-      }
-      else {
-        setrandomLink(random+rating)
-        settrendingLink(trending+rating)
-      }
-    }
+  function handleSubmit(e) {
+    e.preventDefault()
+    setPlusten(10)
+    setHeaderData({
+      [e.target[0].name]: e.target[0].value,
+      [e.target[1].name]: e.target[1].value
+    });
   }
+
+  // trying to implement search in App.js component
+  const [link, setLink] = useState(`${trendinglinkpart}&rating=${rating}`)
+  const [randomLink, setrandomLink] = useState(`${randomlinkpart}&rating=${headerData.rating}`)
+  useEffect(()=>{
+    if (headerData.search.length > 0) {
+      setLink(`${searchlinkpart}&q=${headerData.search}&rating=${headerData.rating}`)
+    } else {
+      setLink(`${trendinglinkpart}&rating=${headerData.rating}`)
+      setrandomLink(`${randomlinkpart}&rating=${headerData.rating}`)
+    }
+    console.log(headerData.search, headerData.rating)
+  },[headerData.search, headerData.rating])
+  // 
+
+  // function handleChange(e) {
+  //   // if (e.target.name == "search") {
+  //   //   setSearch((search)=>e.target.value)
+  //   // } else {
+  //   //   setRating((rating)=>e.target.value)
+  //   // }
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   setHeaderData({
+  //     ...headerData,
+  //     [name]: value,
+  //   });
+  //  }
 
   return (
     <div className="App" style={{ height: "700px"}}>
-      <header>
-        <form onChange={(e) => handleChange(e)}>
-          <input name="search" onChange={(e) => { handleChange(e)}} ></input>
-          <select name = "rating" onChange={(e) => { handleChange(e)}}>
-            <option value="g">G</option>
-            <option value="pg">PG</option>
-            <option value="pg-13">PG-13</option>
-            <option value="r">R</option>
-          </select>
-        </form>
-      </header>
-      {search.length > 0 
+      <Header 
+      search = {headerData.search} 
+      rating = {headerData.rating} 
+      data={headerData} 
+      handleSubmit = {handleSubmit}>
+      </Header>
+      {headerData.search.length > 0 
       ?
-      <Search search = {search} rating = {rating} ></Search>
-      :
-      <Trending rating = {rating} ></Trending>
+      <Search 
+      search = {headerData.search} 
+      rating = {headerData.rating} 
+      searchlinkpart = {searchlinkpart}
+      link = {link}>
+      </Search>
+      : 
+      <div>
+        <Random 
+        rating = {headerData.rating} 
+        randomlinkpart={randomlinkpart}/>
+        <Trending 
+        rating = {headerData.rating} 
+        trendinglinkpart = {trendinglinkpart}
+        link = {link}/>
+      </div>
       }
-      <LoadMore plusten = {plusten} search = {search} rating = {rating}></LoadMore>
+      <LoadMore 
+      plusten = {plusten} 
+      search = {headerData.search} 
+      rating = {headerData.rating} 
+      trendinglinkpart = {trendinglinkpart}
+      searchlinkpart = {searchlinkpart}
+      link={link}
+      />
     </div>
   );
 }
