@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
 
-function Trending({rating, trendinglinkpart}) {
+function Trending({rating, trendinglinkpart, array}) {
     const [trendingArray, settrendingArray] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     useEffect(()=>{
-        setIsLoading(true)
-        fetch(`${trendinglinkpart}&rating=${rating}`)
-        .then(res => res.json())
-        .then((data) => {
-            const timer = setTimeout(() => {
-                setIsLoading(false)
-                settrendingArray(data.data)
-                console.log(trendingArray)
-            }, 1000);
-            return () => clearTimeout(timer);         
-        })
-    },[rating]);
+        settrendingArray(array)
+    },[array])
+    // useEffect(()=>{
+    //     setIsLoading(true)
+    //     fetch(`${trendinglinkpart}&rating=${rating}`)
+    //     .then(res => res.json())
+    //     .then((data) => {
+    //         const timer = setTimeout(() => {
+    //             setIsLoading(false)
+    //             settrendingArray(data.data)
+    //             // console.log(trendingArray)
+    //         }, 1000);
+    //         return () => clearTimeout(timer);         
+    //     })
+    // },[rating]);
 
     if(isLoading) {
         return (

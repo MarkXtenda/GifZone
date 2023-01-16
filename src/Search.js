@@ -33,7 +33,7 @@ function Search({search, rating, link}) {
             console.log(search)
             inni(link)
         }
-      },link)
+      },[link])
     // useEffect(()=>{
     //     if (search.length > 0) {
     //         // 

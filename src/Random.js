@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 
-function Random({rating, randomlinkpart}) {
+function Random({rating, randomlinkpart, array}) {
 
-    const [randomArray, setrandomArray] = useState([])
+    const [randomArray, setrandomArray] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-
+    useEffect(()=>{
+        setrandomArray(array)
+        console.log(randomArray)
+    },[array])
     // async function inni(link) {
     //     await fetch(link)
     //     .then(res => res.json())
@@ -21,32 +24,33 @@ function Random({rating, randomlinkpart}) {
     //     .catch(err => console.error(err));
     //   }
 
-    useEffect(()=>{
-        console.log(`${randomlinkpart}&rating=${rating}`)
-        setIsLoading(true)
-        fetch(`https://dog.ceo/api/breeds/image/random`)
-        .then(res => res.json())
-        .then((data) => {
-            const timer = setTimeout(() => {
-                setIsLoading(false)
-                setrandomArray(data)
-                console.log(data)
-                console.log("array",randomArray)
-                console.log(`${randomlinkpart}&rating=${rating}`)
-            }, 1000);
-            return () => clearTimeout(timer);         
-        })        
-        // fetch(randomLink)
-        // .then(res => res.json())
-        // .then((data) => {
-        //     const timer = setTimeout(() => {
-        //         setIsLoading(false)
-        //         setrandomArray(data.data)
-        //         console.log(randomArray)
-        //     }, 1000);
-        //     return () => clearTimeout(timer);         
-        // })
-    },[rating]);
+    // useEffect(()=>{
+    //     console.log(`${randomlinkpart}&rating=${rating}`)
+    //     setIsLoading(true)
+    //     fetch(`https://dog.ceo/api/breeds/image/random`)
+    //     .then(res => res.json())
+    //     .then((data) => {
+    //         const timer = setTimeout(() => {
+    //             setIsLoading(false)
+    //             setrandomArray(data)
+    //             // console.log(data)
+    //             // console.log("array",randomArray)
+    //             // console.log(`${randomlinkpart}&rating=${rating}`)
+    //         }, 1000);
+    //         return () => clearTimeout(timer);         
+    //     })   
+
+    //     // fetch(randomLink)
+    //     // .then(res => res.json())
+    //     // .then((data) => {
+    //     //     const timer = setTimeout(() => {
+    //     //         setIsLoading(false)
+    //     //         setrandomArray(data.data)
+    //     //         console.log(randomArray)
+    //     //     }, 1000);
+    //     //     return () => clearTimeout(timer);         
+    //     // })
+    // },[rating]);
 
     if(isLoading) {
         return (
@@ -62,7 +66,9 @@ function Random({rating, randomlinkpart}) {
             <section>
                 Random
                 <p>{rating}</p>
-                {/* <p>{randomArray.map((image, id) => <img key={id} src={image.images.downsized.url} style={{ height: "100px", width: "100px" }}></img>)}</p> */}
+                <p>{randomArray.length > 0 
+                ? <img src={randomArray} style={{ height: "100px", width: "100px" }}></img>
+                : <img></img>}</p>
             </section>
         );
     }
