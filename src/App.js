@@ -14,7 +14,7 @@ function App() {
 
   // const [search, setSearch] = useState("")
   const [rating, setRating] = useState("g")
-
+  
   const [headerData, setHeaderData] = useState({ search: "", rating: "g" })
 
   const searchlinkpart = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=10`
