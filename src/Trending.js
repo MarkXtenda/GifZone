@@ -34,7 +34,7 @@ function Trending({rating, trendinglinkpart, array}) {
             <section>
                 Trending
                 <p>{rating}</p>
-                <p>{trendingArray.map((image, id) => <img key={id} src={image.images.downsized.url} style={{ height: "100px", width: "100px" }}></img>)}</p>
+                <div>{trendingArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)}</div>
             </section>
         );
     }

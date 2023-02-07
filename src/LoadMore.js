@@ -49,21 +49,21 @@ function LoadMore({plusten, search, rating, trendinglinkpart, searchlinkpart, li
     if(search == initialVals[0] && initialVals[1] == rating){
 
         return(
-            <div>
-                <p>{LoadMoreArray.map((image, id) => <img key={id} src={image.images.downsized.url} style={{ height: "100px", width: "100px" }}></img>)}</p>
+            <section>
+                <div>{LoadMoreArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)}</div>
                 {isLoading &&
                     <h2>
                     Loading...
                     </h2>
                 }
-            </div>
+            </section>
         );
     }
     else {
         setInitialVals([search,  rating])
         setLoadMoreArray([])
         return(
-            <div></div>
+            <section></section>
         );
     }
   

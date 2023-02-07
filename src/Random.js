@@ -66,9 +66,9 @@ function Random({rating, randomlinkpart, array}) {
             <section>
                 Random
                 <p>{rating}</p>
-                <p>{randomArray.length > 0 
-                ? <img src={randomArray} style={{ height: "100px", width: "100px" }}></img>
-                : <img></img>}</p>
+                {randomArray.length > 0 
+                ? <img src={randomArray}></img>
+                : <img></img>}
             </section>
         );
     }

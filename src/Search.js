@@ -75,7 +75,8 @@ function Search({search, rating, link}) {
             <p>{rating}</p>
             {isLoading 
             ? <h2>Loading...</h2>
-            :<p>{searchArray.map((image, id) => <img key={id} src={image.images.downsized.url} style={{ height: "100px", width: "100px" }}></img>)}</p>}
+            :
+            <div>{searchArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)}</div>}
             </section>
         );} 
   }

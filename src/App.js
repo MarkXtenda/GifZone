@@ -9,14 +9,15 @@ import Trending from './Trending';
 import Random from './Random';
 import Search from './Search';
 import LoadMore from './LoadMore';
+import HeroSection from './HeroSection';
 
 function App() {
 
   // const [search, setSearch] = useState("")
-  const [rating, setRating] = useState("g")
-
+  const rating = "g"
+  const [heroSection, setHeroSection] = useState(true)
   const [headerData, setHeaderData] = useState({ search: "", rating: "g" })
-  
+
   const searchlinkpart = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=10`
   const trendinglinkpart = `https://api.giphy.com/v1/gifs/trending?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=10`
   const randomlinkpart = `https://api.giphy.com/v1/gifs/random?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=10`
@@ -32,6 +33,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    setHeroSection(false)
     setPlusten(10)
     setHeaderData({
       [e.target[0].name]: e.target[0].value.replace(" ", "_"),
@@ -83,23 +85,27 @@ function App() {
   //  }
 
   return (
-    <div className="App" style={{ height: "700px"}}>
-      <Header 
+    <div className="App">
+      <Header
       search = {headerData.search} 
       rating = {headerData.rating} 
       data={headerData} 
       handleSubmit = {handleSubmit}>
       </Header>
+      {heroSection &&
+      <HeroSection display={setHeroSection}></HeroSection>}
       {headerData.search.length > 0 
       ?
+      <div id='content'>
       <Search 
       search = {headerData.search} 
       rating = {headerData.rating} 
       searchlinkpart = {searchlinkpart}
       link = {link}>
       </Search>
+      </div>
       : 
-      <div>
+      <div id='content'>
         <Random 
         rating = {headerData.rating} 
         randomlinkpart={randomlinkpart}
