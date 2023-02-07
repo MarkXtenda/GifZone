@@ -70,13 +70,16 @@ function Search({search, rating, link}) {
     if (search.length > 0) {
         return (
             <section>
-            Search
-            <p>{link}</p>
-            <p>{rating}</p>
             {isLoading 
-            ? <h2>Loading...</h2>
+            ? <h2>Searching...</h2>
             :
-            <div>{searchArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)}</div>}
+            <div>
+                <h2>Results:</h2>
+                <div>{ searchArray.length > 0 
+                    ? searchArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)
+                    : <h2>Sorry. No results were found...</h2>
+                }</div>
+            </div>}
             </section>
         );} 
   }

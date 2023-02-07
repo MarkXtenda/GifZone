@@ -64,8 +64,7 @@ function Random({rating, randomlinkpart, array}) {
     else {
         return (
             <section>
-                Random
-                <p>{rating}</p>
+                <h2>Random</h2>
                 {randomArray.length > 0 
                 ? <img src={randomArray}></img>
                 : <img></img>}

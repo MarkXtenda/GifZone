@@ -96,7 +96,7 @@ function App() {
       <HeroSection display={setHeroSection}></HeroSection>}
       {headerData.search.length > 0 
       ?
-      <div id='content'>
+      <div id='content' style={{paddingTop: !heroSection ? "81px" : "0px"}}>
       <Search 
       search = {headerData.search} 
       rating = {headerData.rating} 
@@ -105,7 +105,7 @@ function App() {
       </Search>
       </div>
       : 
-      <div id='content'>
+      <div id='content' style={{paddingTop: !heroSection ? "81px" : "0px"}}>
         <Random 
         rating = {headerData.rating} 
         randomlinkpart={randomlinkpart}
