@@ -1,62 +1,18 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function Random({rating, randomlinkpart, array}) {
-
-    const [randomArray, setrandomArray] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+function Random({randomImage, array, setGif}) {
+    const [randomArray, setrandomArray] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         setrandomArray(array)
-        console.log(randomArray)
+        setIsLoading(false)
     },[array])
-    // async function inni(link) {
-    //     await fetch(link)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         const timer = setTimeout(() => {
-    //             setIsLoading(false)
-    //             setrandomArray(data.data)
-    //             console.log(randomArray)
-    //             console.log(data.data)
-    //             console.log(randomLink)
-    //         }, 500);
-    //         return () => clearTimeout(timer);  
-    //     })
-    //     .catch(err => console.error(err));
-    //   }
-
-    // useEffect(()=>{
-    //     console.log(`${randomlinkpart}&rating=${rating}`)
-    //     setIsLoading(true)
-    //     fetch(`https://dog.ceo/api/breeds/image/random`)
-    //     .then(res => res.json())
-    //     .then((data) => {
-    //         const timer = setTimeout(() => {
-    //             setIsLoading(false)
-    //             setrandomArray(data)
-    //             // console.log(data)
-    //             // console.log("array",randomArray)
-    //             // console.log(`${randomlinkpart}&rating=${rating}`)
-    //         }, 1000);
-    //         return () => clearTimeout(timer);         
-    //     })   
-
-    //     // fetch(randomLink)
-    //     // .then(res => res.json())
-    //     // .then((data) => {
-    //     //     const timer = setTimeout(() => {
-    //     //         setIsLoading(false)
-    //     //         setrandomArray(data.data)
-    //     //         console.log(randomArray)
-    //     //     }, 1000);
-    //     //     return () => clearTimeout(timer);         
-    //     // })
-    // },[rating]);
 
     if(isLoading) {
         return (
             <section>
                 Random
-                <p>{rating}</p>
                 <h2>Loading...</h2>
             </section>
         );
@@ -65,11 +21,11 @@ function Random({rating, randomlinkpart, array}) {
         return (
             <section>
                 <h2>Random</h2>
-                {randomArray.length > 0 
-                ? <img src={randomArray}></img>
+                {randomArray
+                ? <Link to="/individual" onClick={()=>setGif(array)}><div className="card"><img className="gif-list-image" src={randomImage}></img></div></Link>
                 : <img></img>}
             </section>
-        );
+        );  
     }
   }
   

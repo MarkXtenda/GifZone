@@ -3,7 +3,7 @@ import useDebounce from './hooks/debounce';
 
 import { debounce } from "lodash";
 
-function Search({search, rating, link}) {
+function Search({search, link, setGif}) {
     const [searchArray, setsearchArray] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const searchlinkpart = `https://api.giphy.com/v1/gifs/search?api_key=8UYztLExA1SNDknw5jTntzNLn7SHxgzT&limit=25`
@@ -75,8 +75,8 @@ function Search({search, rating, link}) {
             :
             <div>
                 <h2>Results:</h2>
-                <div>{ searchArray.length > 0 
-                    ? searchArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)
+                <div className="card">{ searchArray.length > 0 
+                    ? searchArray.map((image, id) => <img className="gif-list-image" key={id} src={image.images.downsized.url}></img>)
                     : <h2>Sorry. No results were found...</h2>
                 }</div>
             </div>}

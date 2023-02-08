@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function LoadMore({plusten, search, rating, trendinglinkpart, searchlinkpart, link}) {
+function LoadMore({plusten, search, rating, setGif, link}) {
 
     const [firstRender, setFirstRender] = useState(true)
     const [LoadMoreArray, setLoadMoreArray] = useState([])
@@ -50,7 +51,7 @@ function LoadMore({plusten, search, rating, trendinglinkpart, searchlinkpart, li
 
         return(
             <section>
-                <div>{LoadMoreArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)}</div>
+                <div>{LoadMoreArray.map((image, id) => <Link key={id} to="/individual" onClick={()=>setGif(image)}><img className="gif-list-image" key={id} src={image.images.downsized.url}></img></Link>)}</div>
                 {isLoading &&
                     <h2>
                     Loading...

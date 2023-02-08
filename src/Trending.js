@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function Trending({rating, trendinglinkpart, array}) {
+function Trending({array, setGif}) {
     const [trendingArray, settrendingArray] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         settrendingArray(array)
+        setIsLoading(false)
     },[array])
     // useEffect(()=>{
     //     setIsLoading(true)
@@ -24,7 +26,6 @@ function Trending({rating, trendinglinkpart, array}) {
         return (
             <section>
                 Trending
-                <p>{rating}</p>
                 <h2>Loading...</h2>
             </section>
         );
@@ -33,7 +34,7 @@ function Trending({rating, trendinglinkpart, array}) {
         return (
             <section>
                 <h2>Trending</h2>
-                <div>{trendingArray.map((image, id) => <img key={id} src={image.images.downsized.url}></img>)}</div>
+                <div className="card">{trendingArray.map((image, id) => <Link key={id} to="/individual" onClick={()=>setGif(image)}><img className="gif-list-image" src={image.images.downsized.url}></img></Link>)}</div>
             </section>
         );
     }
