@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useDebounce from './hooks/debounce';
-
+import { Link } from "react-router-dom";
 import { debounce } from "lodash";
 
 function Search({search, link, setGif}) {
@@ -76,7 +76,7 @@ function Search({search, link, setGif}) {
             <div>
                 <h2>Results:</h2>
                 <div className="card">{ searchArray.length > 0 
-                    ? searchArray.map((image, id) => <img className="gif-list-image" key={id} src={image.images.downsized.url}></img>)
+                    ? searchArray.map((image, id) => <Link key={id} to="/individual" onClick={()=>setGif(image)}><img className="gif-list-image" key={id} src={image.images.downsized.url}></img></Link>)
                     : <h2>Sorry. No results were found...</h2>
                 }</div>
             </div>}
