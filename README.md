@@ -1,7 +1,9 @@
 # Giphy Clone
 A simple application that allows users to search and view various GIFs using Giphy.com API.
 
-![image](https://user-images.githubusercontent.com/99150456/217996850-f81d7c78-1eba-4485-9741-ee68167a8724.png)
+<p align="center">
+  <img src="[your-image-url](https://user-images.githubusercontent.com/99150456/217996850-f81d7c78-1eba-4485-9741-ee68167a8724.png)" width="200" height="200">
+</p>
 
 Link: https://63e5b34d497b563485d5b455--timely-churros-3e1fbd.netlify.app/
 
