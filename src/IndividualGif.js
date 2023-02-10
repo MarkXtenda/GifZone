@@ -10,7 +10,7 @@ function IndividualGif({heroSection, gif}) {
         )
     } else {
         return(
-            <section style={{paddingTop: !heroSection ? "81px" : "0px"}}><h2>Nothing to Show</h2></section>
+            <section style={{paddingTop: !heroSection ? "130px" : "0px"}}><h2>Nothing to Show</h2></section>
         )
     }
 }

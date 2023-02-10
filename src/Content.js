@@ -8,7 +8,7 @@ function Content({heroSection, headerData, link, randomImage, array1, array2, se
         <div>
             {headerData.search.length > 0 
             ?
-            <div id='content' style={{paddingTop: !heroSection ? "81px" : "0px"}}>
+            <div id='content' style={{paddingTop: !heroSection ? "130px" : "0px"}}>
             <Search 
             search = {headerData.search} 
             link = {link}
@@ -16,7 +16,7 @@ function Content({heroSection, headerData, link, randomImage, array1, array2, se
             </Search>
             </div>
             : 
-            <div id='content' style={{paddingTop: !heroSection ? "81px" : "0px"}}>
+            <div id='content' style={{paddingTop: !heroSection ? "130px" : "0px"}}>
                 <Random 
                 randomImage = {randomImage}
                 array = {array1}
