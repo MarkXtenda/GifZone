@@ -3,18 +3,16 @@ A simple application that allows users to search and view various GIFs from Giph
 
 Link: https://63e5b34d497b563485d5b455--timely-churros-3e1fbd.netlify.app/
 
-##Features
-Search for specific GIFs by title
-Filter search results by rating (G, PG, PG-13, R)
-Display random and trending GIFs when no search query is entered
-View GIFs in a larger size with detailed information
-Usage
+## Features
+* Search for specific GIFs by title
+* Filter search results by rating (G, PG, PG-13, R)
+* Display random and trending GIFs when no search query is entered
+* View GIFs in a larger size with detailed information
+## Usage
 To use the application, simply type in a keyword or phrase in the search bar and hit the search button. The results will be displayed and can be filtered by rating. If you would like to see a specific GIF in more detail, simply click on it.
 
-##Contributing
+## Contributing
 If you would like to contribute to the development of this application, feel free to fork the repository and create a pull request.
 
-##License
-This project is licensed under the MIT License.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Creators
+This project was created by Mark Kholodii.
