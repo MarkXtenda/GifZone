@@ -5,7 +5,7 @@
 <p align="center">Link: https://63e5b34d497b563485d5b455--timely-churros-3e1fbd.netlify.app/</p>
 
 ## Description
-A simple application that allows users to search and view various GIFs using Giphy.com API.
+A simple React application that allows users to search and view various GIFs using Giphy.com API.
 
 ## Features
 * Search for specific GIFs by title
