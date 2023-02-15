@@ -4,8 +4,8 @@
 
 #hero {
   padding-top: 130px;
+  padding-bottom: 30px;
   background-color: #F9F9F9;
-  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,6 +81,11 @@ button[type="submit"] {
 /* RANDOM Component */
 
 /* TRENDING Component */
+.card {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
 section {
   
