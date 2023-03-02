@@ -3,7 +3,7 @@ function IndividualGif({heroSection, gif}) {
         return(
             <section style={{paddingTop: !heroSection ? "130px" : "0px"}}>
                 <h2>{gif.title}</h2>
-                <img src={gif.images.original.url} alt=''></img>
+                <img className="individual-gif-image" src={gif.images.original.url} alt=''></img>
                 <h4>Author username: {gif.username}</h4>
                 <h5>Added on: {gif.trending_datetime.replaceAll('-', "/")}</h5>
             </section>

@@ -76,15 +76,15 @@ button[type="submit"] {
 
 /* HEADER Component */
 
-/* RANDOM Component */
-
-/* RANDOM Component */
-
 /* TRENDING Component */
 .card {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.individual-gif-image {
+  width: 60%;
 }
 
 section {
