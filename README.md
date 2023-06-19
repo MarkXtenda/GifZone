@@ -2,7 +2,7 @@
 <p align="center">
   <img src="https://i.pinimg.com/originals/e4/26/70/e426702edf874b181aced1e2fa5c6cde.gif" width="25%" height="25%">
 </p>
-<p align="center">Link: gifzone-by-mark.netlify.app/</p>
+<p align="center">Link: https://gifzone-by-mark.netlify.app/</p>
 
 ## Description
 A simple React application that allows users to search and view various GIFs using Giphy.com API.
