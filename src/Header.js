@@ -2,7 +2,7 @@ function Header({search, rating, data, handleChange, handleSubmit}) {
     
     return (
         <header>
-          <a href="/"><h1>Giphy Clone</h1></a>
+          <a href="/"><h1>GifZone</h1></a>
         <form onSubmit={(e) => {handleSubmit(e)}}>
           <input name="search"></input>
           <select name = "rating" >
